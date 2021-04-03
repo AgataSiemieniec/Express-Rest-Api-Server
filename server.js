@@ -13,7 +13,6 @@ const db = [
 
 const message = { message: 'Ok'};
 
-
 app.get('/testimonials', (req, res) => {
   res.json(db);
 });
@@ -52,6 +51,9 @@ app.delete('/testimonials/:id', (req, res) => {
   res.json(message);
 });
 
+app.use((req, res) => {
+  res.status(404).send({ message: 'Not found...' });
+})
 
 app.listen(8000, () => {
   console.log('Server is running on port: 8000');
