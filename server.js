@@ -1,28 +1,26 @@
 const express = require('express');
 const { v4: uuidv4 } = require('uuid');
+const db = require('./db');
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const db = [
-  { id: 1, author: 'John Doe', text: 'This company is worth every coin!' },
-  { id: 2, author: 'Amanda Doe', text: 'They really know how to make you happy.' },
-];
-
 const message = { message: 'Ok'};
 
+/*testmonials*/
+
 app.get('/testimonials', (req, res) => {
-  res.json(db);
+  res.json(db.testimonials);
 });
 
 app.get('/testimonials/:id', (req, res) => {
-  res.json(db[`${req.params.id}`-1]);
+  res.json(db.testimonials[`${req.params.id}`-1]);
 });
 
 app.get('/testimonials/random', (req, res) => {
-  const random = db[Math.floor(Math.random() * db.length)];
+  const random = db.testimonials[Math.floor(Math.random() * db.testimonials.length)];
   res.json(random);
 });
 
@@ -34,13 +32,13 @@ app.post('/testimonials', (req, res) => {
   text: req.body.text
   };
 
-  db.push(addRecord);
+  db.testimonials.push(addRecord);
   res.json(message);
 });
 
 app.put('/testimonials/:id', (req, res) => {
   const { author, text } = req.body;
-  const updatedRecord = db.find(item => item.id == `${req.params.id}`);
+  const updatedRecord = db.testimonials.find(item => item.id == `${req.params.id}`);
   updatedRecord.author = req.body.author;
   updatedRecord.text = req.body.text;
   res.json(message);
