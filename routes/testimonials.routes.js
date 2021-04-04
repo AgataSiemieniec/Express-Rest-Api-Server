@@ -19,6 +19,13 @@ router.route('/testimonials/random').get((req, res) => {
     res.json(random);
 });
 
+router.route('/testimonials/random').get((req, res) => {
+    const randomItem = (max) => {
+      return Math.floor(Math.random() * (max));
+    };
+    res.json(db.testimonials[randomItem(db.testimonials.length)]);
+});
+
 router.route('/testimonials').post((req, res) => {
     const { author, text, id } = req.body;
     const addRecord = {
