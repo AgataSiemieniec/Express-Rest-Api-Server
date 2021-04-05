@@ -16,6 +16,7 @@ router.route('/seats/:id').get((req, res) => {
 
 router.route('/seats').post((req, res) => {
     const { id, day, seat, client, email } = req.body;
+
     const addRecord = {
         id: uuidv4(),
         day: req.body.day,
@@ -23,8 +24,16 @@ router.route('/seats').post((req, res) => {
         client: req.body.client,
         email: req.body.email
     };
-    db.seats.push(addRecord);
-    res.json(message);
+
+    const bookedSeat = db.seats.find(item => item.seat == req.body.seat);
+    const bookedDay = db.seats.some(item => item.day == req.body.day);
+
+    if (bookedDay && bookedSeat){
+        res.status(404).json({ message: '404 Not Found!  The slot is already taken...'});
+    } else {
+        db.seats.push(addRecord);
+        res.json(message);
+    }
 });
 
 router.route('/seats/:id').put((req, res) => {
