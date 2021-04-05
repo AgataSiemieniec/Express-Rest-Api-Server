@@ -5,6 +5,7 @@ import SeatChooser from './SeatChooser';
 const mapStateToProps = state => ({
   seats: getSeats(state),
   requests: getRequests(state),
+  
 });
 
 const mapDispatchToProps = dispatch => ({
