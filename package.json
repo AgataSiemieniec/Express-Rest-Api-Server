@@ -1,5 +1,4 @@
 {
-
   "name": "express-rest-api-server",
   "version": "1.0.0",
   "main": "index.js",
@@ -11,6 +10,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "4.17.1",
+    "socket.io": "2.2.0",
     "uuid": "^8.3.2"
   }
 }
