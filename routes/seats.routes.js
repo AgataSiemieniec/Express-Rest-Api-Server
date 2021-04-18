@@ -32,6 +32,7 @@ router.route('/seats').post((req, res) => {
         res.status(404).json({ message: '404 Not Found!  The slot is already taken...'});
     } else {
         db.seats.push(addRecord);
+        req.io.emit('seatsUpdated', (db.seats));
         res.json(message);
     }
 });

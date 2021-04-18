@@ -10,6 +10,11 @@ const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '/client/build')));
 
