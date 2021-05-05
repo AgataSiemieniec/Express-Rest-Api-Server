@@ -4,7 +4,6 @@ const cors = require("cors");
 const path = require('path');
 const socket = require('socket.io');
 
-
 // import routes
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
